@@ -9,7 +9,18 @@
 
     <style>
         #animal-form {
-            display: inline-block;
+            width: 50%;
+        }
+
+        #add-animal {
+            background-color:blueviolet;
+            color: white;
+        }
+
+        button {
+            background-color: turquoise;
+            margin: 5px;
+            font-size: 16px;
         }
     </style>
 
@@ -41,7 +52,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript"> 
 
-        var animals = ["Otters", "Sloths", "Dogs", "Cats", "Frogs", "Owls", "Bunnies",];
+        var animals = ["Otters", "Sloths", "Dogs", "Cats", "Frogs", "Owls", "Deer",];
 
         //creates buttons from array, adds classes, attributes, appends to animal buttons div
         function renderButtons() {
@@ -96,10 +107,10 @@
                     gifDiv.append(p);
                     gifDiv.prepend(animalImages);
 
-                    $("#gifs").prepend(gifDiv)
+                    $("#gifs").prepend(gifDiv) //prepend row? append column? 
                 }
             
-
+            //on click, gifs change their source attribute from still to animate and back to still
             $(".gif").on("click", function () {
                 console.log("clicked");
                 var state = $(this).attr("data-state");
@@ -114,6 +125,7 @@
             })
 
             });
+
         });
 
         renderButtons();
