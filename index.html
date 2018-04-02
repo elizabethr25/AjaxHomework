@@ -43,6 +43,7 @@
 
         var animals = ["Otters", "Sloths", "Dogs", "Cats", "Frogs", "Owls", "Bunnies", ];
 
+        //creates buttons from array, adds classes, attributes, appends to animal buttons div
         function renderButtons() {
             $("#animalButtons").empty();
             for (var i = 0; i < animals.length; i++) {
@@ -54,7 +55,8 @@
                 $("#animalButtons").append(a);
             }
         }
-
+        
+        // on submit of the add animal input, push input value to the array and render new buttons
         $("#addAnimal").on("submit", function (event) {
             event.preventDefault();
             var input = ("#animal-input").val().trim();
@@ -63,12 +65,14 @@
             renderButtons();
         })
 
+        // pull data-name of button to determime button category to search in the giphy query 
         $("#animalButtons").on("click", function () {
             var pet = $(this).attr("data-name");
             event.preventDefault();
             console.log(pet);
             var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + pet + "&api_key=ZwIXRyEIi6pucasmaOfuW6GpmytW8NTq&limit=10"
 
+            // use ajax to query response for image, rating; then creates p and img tags and appends them to the document 
             $.ajax({
                 url: queryURL,
                 method: "GET"
