@@ -41,7 +41,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript"> 
 
-        var animals = ["Otters", "Sloths", "Dogs", "Cats", "Frogs", "Owls", "Bunnies", ];
+        var animals = ["Otters", "Sloths", "Dogs", "Cats", "Frogs", "Owls", "Bunnies",];
 
         //creates buttons from array, adds classes, attributes, appends to animal buttons div
         function renderButtons() {
@@ -55,24 +55,17 @@
                 $("#animalButtons").append(a);
             }
         }
-        
-        // on submit of the add animal input, push input value to the array and render new buttons
-        $("#addAnimal").on("submit", function (event) {
-            event.preventDefault();
-            var input = ("#animal-input").val().trim();
-            console.log(input);
-            animals.push(input);
-            renderButtons();
-        })
+
+
 
         // pull data-name of button to determime button category to search in the giphy query 
-        $("#animalButtons").on("click", function () {
+        $(document).on("click", ".animal", function () {
             var pet = $(this).attr("data-name");
             event.preventDefault();
             console.log(pet);
             var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + pet + "&api_key=ZwIXRyEIi6pucasmaOfuW6GpmytW8NTq&limit=10"
 
-            // use ajax to query response for image, rating; then creates p and img tags and appends them to the document 
+            // use ajax to query response for image, rating; then creates p and img tags and appends them to the document 4
             $.ajax({
                 url: queryURL,
                 method: "GET"
@@ -80,11 +73,11 @@
                 console.log(queryURL);
                 console.log(response);
                 var results = response.data;
-                var imageUrl = response.data.fixed_height_still;
-
-                for (var p = 0; p < results.length; p++) {
+                
+                for (var k = 0; k < results.length; k++) {
                     var gifDiv = $("<div class='animalDiv'>");
-                    var rating = results[p].rating;
+                    var rating = results[k].rating;
+                    var imageUrl = results[k].images.fixed_height_still.url;
                     var p = $("<p>").text("Rating: " + rating);
                     var animalImages = $("<img>");
                     animalImages.attr("src", imageUrl);
@@ -98,7 +91,15 @@
 
             });
 
-
+            // on submit of the add animal input, push input value to the array and render new buttons
+            $("addAnimal").on("submit", function (event) {
+                console.log("submitted");
+                event.preventDefault();
+                var input = ("#animal-input").val().trim();
+                console.log(input);
+                animals.push(input);
+                renderButtons();
+            })
 
         });
 
