@@ -50,7 +50,6 @@
                 var a = $("<button>");
                 a.addClass("animal");
                 a.attr("data-name", animals[i]);
-                a.attr("data-state=still");
                 a.text(animals[i]);
                 $("#animalButtons").append(a);
             }
@@ -84,17 +83,36 @@
                 for (var k = 0; k < results.length; k++) {
                     var gifDiv = $("<div class='animalDiv'>");
                     var rating = results[k].rating;
-                    var imageUrl = results[k].images.fixed_height_still.url;
+                    var stillImageUrl = results[k].images.fixed_height_still.url;
+                    var animatedImageUrl = results[k].images.fixed_height.url;
                     var p = $("<p>").text("Rating: " + rating);
                     var animalImages = $("<img>");
-                    animalImages.attr("src", imageUrl);
+                    animalImages.attr("src", stillImageUrl);
+                    animalImages.addClass("gif");
+                    animalImages.attr("data-state", "still");
                     animalImages.attr("alt", "Image of " + pet);
-
+                    animalImages.attr("data-still", stillImageUrl);
+                    animalImages.attr("data-animate", animatedImageUrl);
                     gifDiv.append(p);
                     gifDiv.prepend(animalImages);
 
                     $("#gifs").prepend(gifDiv)
                 }
+            
+
+            $(".gif").on("click", function () {
+                console.log("clicked");
+                var state = $(this).attr("data-state");
+                console.log(state);
+                if (state === "still") {
+                    $(this).attr("src", $(this).attr("data-animate"));
+                    $(this).attr("data-state", "animate");
+                } else {
+                    $(this).attr("src", $(this).attr("data-still"));
+                    $(this).attr("data-state", "still");
+                }
+            })
+
             });
         });
 
