@@ -1,0 +1,33 @@
+body {
+    background-color: lightgrey;
+}
+
+#animal-form {
+    width: 100%;
+}
+
+label {
+    font-family: 'Franklin Gothic Medium', Arial, sans-serif;
+    float: right;
+    padding-right: 50px;
+}
+
+#animal-input {
+    clear: both;
+    float: right;
+    width: 300px;
+}
+
+#add-animal {
+    background-color:blueviolet;
+    color: white;
+    font-size: 14px;
+    float: right;
+    
+}
+
+button {
+    background-color: turquoise;
+    margin: 5px;
+    font-size: 16px;
+}
